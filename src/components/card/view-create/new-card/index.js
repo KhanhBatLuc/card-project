@@ -8,6 +8,7 @@ import FormFullName from './formFullName';
 import ButtonCreate from './buttonCreate';
 const RootStyle = styled(Card)(({ theme }) => ({
   minWidth: 275,
+  borderRadius: 'unset',
   borderTopLeftRadius: '0.625rem',
   borderTopRightRadius: ' 0.625rem',
   boxShadow: theme.customShadows.z16

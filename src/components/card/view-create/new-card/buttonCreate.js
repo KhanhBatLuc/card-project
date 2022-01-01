@@ -13,7 +13,7 @@ const ButtonRoot = styled(Box)(({ theme }) => ({
   textAlign: 'center',
   bottom: 0,
   borderTop: ' 2px solid rgb(233, 233, 233)',
-  boxShadow: '0px 0px 0px 0px rgb(100 116 139 / 70%), 0px 1px 2px rgb(100 116 139 / 39%)',
+  boxShadow: theme.customShadows.z16,
   borderBottomLeftRadius: '0.625rem',
   borderBottomRightRadius: ' 0.625rem'
 }));

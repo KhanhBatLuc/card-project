@@ -5,6 +5,34 @@ import { Icon } from '@iconify/react';
 
 import { Draggable } from 'react-beautiful-dnd';
 
+import { MyTextArea, InputDate, InputSelect, InputDefault } from '.';
+
+const dataPhoneItem = [
+  {
+    name: 'Home',
+    value: 'home'
+  },
+  {
+    name: 'Company',
+    value: 'company'
+  },
+  {
+    name: 'Works',
+    value: 'work'
+  }
+];
+
+const dataEmailItem = [
+  {
+    name: 'Work',
+    value: 'Work'
+  },
+  {
+    name: 'Personal',
+    value: 'Personal'
+  }
+];
+
 function InputInfomation({ icon, defaultValue, currentColor, placeholder, ...rest }) {
   const useStyles = makeStyles({
     root: {
@@ -19,11 +47,32 @@ function InputInfomation({ icon, defaultValue, currentColor, placeholder, ...res
       }
     }
   });
+
   const classes = useStyles();
 
   const handleRemoveIcon = () => {
     rest.onRemove(rest.id);
   };
+
+  let inputChoose = {};
+
+  switch (rest.title) {
+    case 'Phone':
+      inputChoose = <InputSelect label="Paty" dataItem={dataPhoneItem} />;
+      break;
+    case 'Date':
+      inputChoose = <InputDate />;
+      break;
+    case 'Email':
+      inputChoose = <InputSelect label="Email" dataItem={dataEmailItem} />;
+      break;
+    case 'Notes':
+      inputChoose = <MyTextArea defaultValue="Note" />;
+      break;
+    default:
+      inputChoose = <InputDefault className={classes?.root} />;
+      break;
+  }
 
   return (
     <Draggable key={rest.id} draggableId={String(rest.id)} index={rest.index}>
@@ -52,7 +101,6 @@ function InputInfomation({ icon, defaultValue, currentColor, placeholder, ...res
               defaultValue={defaultValue}
               InputProps={{
                 style: {
-                  fontSize: '0.875rem',
                   paddingBottom: '.5rem'
                 },
                 startAdornment: <InputAdornment position="start">{icon}</InputAdornment>,
@@ -70,21 +118,7 @@ function InputInfomation({ icon, defaultValue, currentColor, placeholder, ...res
               variant="standard"
               className={classes.root}
             />
-
-            <TextField
-              fullWidth
-              margin="dense"
-              InputProps={{
-                style: {
-                  fontSize: '0.875rem',
-                  paddingBottom: '.25rem',
-                  paddingTop: '.5rem'
-                }
-              }}
-              placeholder="Sometime"
-              variant="standard"
-              className={classes.root}
-            />
+            {inputChoose}
           </div>
         </Box>
       )}
